@@ -7,13 +7,19 @@
        (product (rest coll)))))
 
 (defn singleton? [coll]
-  (and (boolean (seq coll)) (empty? (rest coll ))))
+  (and (boolean (seq coll))
+       (empty? (rest coll ))))
 
 (defn my-last [coll]
   (cond
     (empty? coll) nil
     (singleton? coll) (first coll)
     :else (my-last (rest coll))))
+
+(defn my-last1 [coll]
+  (if (empty? (rest coll))
+    (first coll)
+    (recur (rest coll))))
 
 (defn max-element [a-seq]
   (cond
@@ -22,9 +28,9 @@
     :else (max (first a-seq) (max-element (rest a-seq)))))
 
 (defn seq-max [seq-1 seq-2]
-  (if (<= (count seq-1) (count seq-2))
-    seq-2
-    seq-1))
+  (if (> (count seq-1) (count seq-2))
+    seq-1
+    seq-2))
 
 (defn longest-sequence [a-seq]
   (cond
